@@ -1,3 +1,9 @@
+# PATHWAY ENRICHMENT ANALYSIS 
+## Author: Paula de Blas
+## Pathway Enrichment Over-representation Analysis using GO, KEGG and Reactome for all cell types with DEGs.
+
+
+
 library(dplyr)
 library(tidyverse)
 library(clusterProfiler)

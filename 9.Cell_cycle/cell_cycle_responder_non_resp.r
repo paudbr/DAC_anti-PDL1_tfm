@@ -48,6 +48,8 @@ nodes <- data.frame(name = unique(c(df$source, df$target)))
 df$source_id <- match(df$source, nodes$name) - 1
 df$target_id <- match(df$target, nodes$name) - 1
 
+my_color <- 'd3.scaleOrdinal() .domain(["Non-responder", "Responder","G1", "G2M", "S"]) .range([ "#5A7CA5", "#B7D1F1", "#ff8000", "green", "#ffd5b1" ])'
+
 sankey <- sankeyNetwork(Links = df,
                         Nodes = nodes,
                         Source = "source_id",
@@ -55,6 +57,7 @@ sankey <- sankeyNetwork(Links = df,
                         Value = "value",
                         NodeID = "name",
                         fontSize = 30,
+                        colourScale= my_color,
                         nodeWidth = 30)
 
 saveWidget(sankey, file = "/home/workdir/HDAC_tfm/DAC_anti-PDL1_tfm/fig/sankey_temp.html", selfcontained = TRUE)
@@ -65,7 +68,7 @@ nodes <- data.frame(name = unique(c(df_uv$source, df_uv$target)))
 df_uv$source_id <- match(df$source, nodes$name) - 1
 df_uv$target_id <- match(df$target, nodes$name) - 1
 
-my_color <- 'd3.scaleOrdinal() .domain(["Non-responder", "Responder","G1", "G2M", "S"]) .range([ "#aa8caf", "#e2d8e4", "#ff8000", "#ffd5b1", "green"])'
+my_color <- 'd3.scaleOrdinal() .domain(["Non-responder", "Responder","G1", "G2M", "S"]) .range([ "#aa8caf", "#e2d8e4", "#ff8000", "green", "#ffd5b1" ])'
 sankey <- sankeyNetwork(Links = df_uv,
                         Nodes = nodes,
                         Source = "source_id",
