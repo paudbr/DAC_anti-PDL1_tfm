@@ -1,3 +1,12 @@
+################################################################################
+# Title: Pathway Enrichment analysis (PEA)
+# Author: Paula
+# Description:
+#   This script performs PEA of the significant DEGs expressed in different cell types,
+#   using GO BP, KEGG nad Reactome. 
+#
+################################################################################
+
 library(Seurat)
 library(org.Mm.eg.db)
 library(clusterProfiler)
@@ -142,7 +151,6 @@ degs_annotated_ordered_down <- degs_annotated %>%
   arrange(avg_log2FC_comb)
 
 
-library(pheatmap)
 
 
 ## UP -------------------------------------------------------------------

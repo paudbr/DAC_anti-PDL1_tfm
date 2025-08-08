@@ -1,4 +1,12 @@
-### CELL CICLE
+################################################################################
+# Title: Cell cycle analysis
+# Author: Paula
+# Description:
+#   Using Seurat CellCycleScoring() function to know in which cell cycle phase is
+#   each cell
+#
+################################################################################
+
 library(Seurat)
 library(OmnipathR)
 library(magrittr)

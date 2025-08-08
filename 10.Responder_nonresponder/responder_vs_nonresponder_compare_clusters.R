@@ -1,3 +1,9 @@
+################################################################################
+# Title: DGEA and PEA between responder and non -responder cells
+# Author: Paula
+################################################################################
+
+
 library(Seurat)
 library(org.Mm.eg.db)
 library(clusterProfiler)

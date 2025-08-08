@@ -1,3 +1,12 @@
+################################################################################
+# Title: Subclustering of tumor cells 
+# Author: Paula
+# Description:
+#   Subclustering with Seurat tools in order to find specific subpopulations
+#   in tumor cells
+#
+################################################################################
+
 library(Seurat)
 library(ggplot2)
 library(tidyverse)
@@ -9,18 +18,11 @@ table(immune_combined@meta.data$sample, immune_combined@meta.data$immuno )
 
 
 tumor_cells <- subset(immune_combined, subset = immuno %in% c("Cancer cells", "Unannotated"))
-
-# Identificar los genes más variables
 tumor_cells <- FindVariableFeatures(tumor_cells, selection.method = "vst", nfeatures = 3000)
 
-
-# Visualizar los genes más variables
 VariableFeaturePlot(tumor_cells)
 
-# Realizar la normalización
 tumor_cells <- ScaleData(tumor_cells, features = VariableFeatures(tumor_cells))
-
-# PCA con los genes más variables
 tumor_cells <- RunPCA(tumor_cells, features = VariableFeatures(tumor_cells), npcs = 30)
 library(clustree)
 tumor_cells <- FindNeighbors(tumor_cells, dims = 1:30)  # Recalcular los vecinos
@@ -73,7 +75,7 @@ p <- clustree(cluster_results_wide, prefix = "res_", layout = "tree", node_text_
 ggsave("./HDAC_tfm/fig/sub_clust_tumor/subclustering_v2/clustree_res_tumor_cancer_unann_subclustering_plot_2.png", plot = p, width = 18, height = 15, dpi=600)
 
 
-# SILUETA -----------------------------------------------------------------
+# SILHOUTTE -----------------------------------------------------------------
 library(cluster)
 # Calcular matriz de distancias entre células
 cell_dists <- dist(tumor_cells@reductions$pca@cell.embeddings, method = "euclidean")
@@ -134,13 +136,11 @@ ggsave(paste0("./HDAC_tfm/fig/sub_clust_tumor/subclustering_v2/UMAPbytreatments_
 
 Idents(tumor_cells) <- tumor_cells@meta.data$RNA_snn_res.0.05
 
-# Ahora ejecuta FindAllMarkers
+
 tumor_cells <- JoinLayers(tumor_cells)
 markers <- FindAllMarkers(tumor_cells, only.pos = TRUE, min.pct = 0.25, logfc.threshold = 0.25)
 
 res = 0.05
-
-#Quiero ver los top 10, genes por cluster
 library(dplyr)
 
 top_markers <- markers %>%
@@ -148,7 +148,7 @@ top_markers <- markers %>%
   top_n(n = 10, wt = avg_log2FC) %>%
   arrange(cluster, desc(avg_log2FC))  # Ordenar los genes dentro de cada cluster por avg_log2FC
 
-# Crear el gráfico DotPlot con los top genes
+
 plot <- DotPlot(tumor_cells, features = unique(top_markers$gene))
 ggsave(paste0("./HDAC_tfm/fig/sub_clust_tumor/subclustering_v2/Dotplot_subclustering_tumor_unnan_",res,".png"), plot = plot + coord_flip(), width = 10, height = 8, dpi=600)
 
@@ -171,13 +171,12 @@ upset(
   sets.bar.color = "green",
   nsets = length(markers_by_cluster),
   nintersects = NA,
-  text.scale = c(2, 2, 2, 2)  # Ajustar los tamaños de las fuentes (puedes modificar estos valores)
-)
+  text.scale = c(2, 2, 2, 2) 
 
-dev.off()  # Finaliza el archivo gráfico
+dev.off()  
 
 
-# FIRMAS ------------------------------------------------------------------
+# SIGNATURES ------------------------------------------------------------------
 
 library(IOBR)
 tumor_cells_copy <- tumor_cells

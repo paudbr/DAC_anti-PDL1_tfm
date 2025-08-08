@@ -1,3 +1,12 @@
+################################################################################
+# Title: Immune signature analysis
+# Author: Paula
+# Description:
+#   This script studies the expression of different immune-tumor signatures (IOBR, M1 ...)
+#   in different immune cell types
+#
+################################################################################
+
 library(IOBR)
 library(Seurat)
 library(ggplot2)

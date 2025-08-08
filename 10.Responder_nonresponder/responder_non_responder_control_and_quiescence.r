@@ -1,3 +1,9 @@
+################################################################################
+# Title: DGEA and PEA between control vs responder , control vs non responder from both cell lines
+# Author: Paula
+################################################################################
+
+
 library(Seurat)
 library(ggplot2)
 library(tidyverse)

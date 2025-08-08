@@ -1,3 +1,13 @@
+################################################################################
+# Title: Cell cycle analysis between responder and non-responder cells
+# Author: Paula
+# Description:
+#   Using Seurat CellCycleScoring() function to know in which cell cycle phase is
+#   each cell and comparing the differences between responder and non responder. 
+#
+################################################################################
+
+
 library(Seurat)
 library(ggplot2)
 library(htmlwidgets)

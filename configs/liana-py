@@ -1,0 +1,27 @@
+FROM python:3.10-slim
+
+# Instala dependencias del sistema
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libhdf5-dev \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Actualiza pip
+RUN python -m pip install --upgrade pip
+
+# Instala scanpy y jupyter
+RUN pip install scanpy jupyter
+
+# Instala liana directamente desde GitHub
+RUN pip install git+https://github.com/saezlab/liana-py.git
+
+# Crea un directorio de trabajo
+WORKDIR /workspace
+
+# Expone el puerto para Jupyter
+EXPOSE 8888
+
+# Comando por defecto: arranca Jupyter sin token
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token=''"]
+
