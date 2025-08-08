@@ -27,15 +27,15 @@ This framework is based on:
 
 ##  Requirements
 
-Docker installed with client version 23.0.1 or higher, and preferably server version 28.1.1 or higher.
+- Docker installed with client version 23.0.1 or higher, and preferably server version 28.1.1 or higher.
 
-Docker daemon running and user permissions to execute Docker commands.
+- Docker daemon running and user permissions to execute Docker commands.
 
-Ports 8080 and 8787 free or modifiable as needed to publish services.
+- Ports 8080 and 8787 free or modifiable as needed to publish services.
 
-Git installed to clone the repository.
+- Git installed to clone the repository.
 
-In configs folder, a dockerfile for liana can be found. See 2. Seting up environments
+- In configs folder, a dockerfile for liana can be found. See 2. Seting up environments
 
 ## Istalation
 
@@ -65,7 +65,7 @@ docker run -it -p 8080:8080 --name guisesanz/simic:2.1.0 /bin/bash
 
 ```
 
-####LIANA DOCKER
+#### LIANA DOCKER
 ```
 cd configs/liana-py
 
